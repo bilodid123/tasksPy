@@ -19,3 +19,6 @@
 """
 
 ip = "192.168.3.1"
+ip = [int(s) for s in ip.split('.')]
+print(f'{ip[0]:<8} {ip[1]:<8} {ip[2]:<8} {ip[3]:<8}')
+print(f'{ip[0]:b} {ip[1]:08b} {ip[2]:08b} {ip[3]:08b}')

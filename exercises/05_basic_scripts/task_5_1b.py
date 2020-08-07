@@ -45,3 +45,8 @@ london_co = {
         "routing": True,
     },
 }
+
+device_name = input('Enter your device name: ')
+parameters = ', '.join(london_co[device_name].keys())
+device_parameter = input(f'Enter parameter name ({parameters}): ')
+print(london_co[device_name][device_parameter])

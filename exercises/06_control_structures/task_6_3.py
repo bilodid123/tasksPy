@@ -43,7 +43,7 @@ trunk_template = [
 
 access = {"0/12": "10", "0/14": "11", "0/16": "17", "0/17": "150"}
 trunk = {"0/1": ["add", "10", "20"], "0/2": ["only", "11", "30"], "0/4": ["del", "17"]}
-
+print('\n\n')
 for intf, vlan in access.items():
     print("interface FastEthernet" + intf)
     for command in access_template:
@@ -51,3 +51,25 @@ for intf, vlan in access.items():
             print(" {} {}".format(command, vlan))
         else:
             print(" {}".format(command))
+print('\n\n')
+
+for intf in trunk:
+    print('interface FastEthernet' + intf)
+    if trunk[intf][0] == 'add':
+        for command in trunk_template:
+            if command.endswith('allowed vlan'):
+                print(' {} {} {}'.format(command,'add',','.join(trunk[intf][1:])))
+            else:
+                print(' {}'.format(command))
+    elif trunk[intf][0] == 'del':
+        for command in trunk_template:
+            if command.endswith('allowed vlan'):
+                print(' {} {} {}'.format(command,'remove',','.join(trunk[intf][1:])))
+            else:
+                print(' {}'.format(command))
+    else:
+        for command in trunk_template:
+            if command.endswith('allowed vlan'):
+                print(' {} {}'.format(command,','.join(trunk[intf][1:])))
+            else:
+                print(' {}'.format(command))

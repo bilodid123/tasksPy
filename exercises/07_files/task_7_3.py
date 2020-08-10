@@ -17,3 +17,11 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+macs = {}
+with open('/Users/arima/Documents/vsCodePy/tasksPy/exercises/07_files/CAM_table.txt', 'r') as read_file:
+    for line in read_file:
+        if 'DYNAMIC' in line:
+            macs[int(line.split()[0])] = line.split()[1:]
+for key in macs:
+    print(f'{key:<4} {" ".join(macs[key])}')
+

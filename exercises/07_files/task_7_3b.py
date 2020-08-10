@@ -11,3 +11,8 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+vlan = input('Enter the VLAN number: ')
+with open('/Users/arima/Documents/vsCodePy/tasksPy/exercises/07_files/CAM_table.txt', 'r') as read_file:
+    for line in read_file:
+       if vlan in line.strip('\n').split():
+           print(line.strip())

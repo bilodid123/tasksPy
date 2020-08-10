@@ -12,3 +12,9 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+from sys import argv
+file_name = argv[1]
+with open(file_name, 'r') as f:
+    for line in f:
+        if not line.startswith('!'):
+            print(line.strip())

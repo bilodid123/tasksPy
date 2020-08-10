@@ -12,5 +12,19 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
-
+write_file = '/Users/arima/Documents/vsCodePy/tasksPy/exercises/07_files/config_sw1_cleared.txt'
 ignore = ["duplex", "alias", "Current configuration"]
+to_write = []
+from sys import argv
+file_name = argv[1]
+with open(file_name, 'r') as f:
+    for line in f:
+      flag = True
+      for i in ignore:
+        if i in line:
+          flag = False
+      if not line.startswith('!') and flag:
+          to_write.append(line.lstrip('\n'))
+        #   print(line)
+with open(write_file, 'w') as w:
+    w.writelines(to_write)

@@ -23,3 +23,22 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+def get_int_vlan_map(config_filename):
+    access_ports = {}
+    trunk_ports = {}
+    with open(config_filename, 'r') as f:
+        for line in f:
+            if 'interface FastEthernet' in line:
+                key = line.split()[1]
+                flag = True
+            elif 'switchport access vlan' in line:
+                access_ports[key] = int(line.split()[-1])
+                flag = False
+            elif 'switchport trunk allowed' in line:
+                trunk_ports[key] = [int(s) for s in line.split()[-1].split(',')]
+                flag = False
+            elif 'duplex auto' in line and flag:
+                access_ports[key] = 1
+    result = (access_ports, trunk_ports)
+    return result
+                
